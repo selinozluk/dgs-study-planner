@@ -69,13 +69,13 @@ button {
   padding: 20px;
   border-radius: 12px;
   border-left: 4px solid var(--accent);
-  overflow-x: auto; /* Tablo taşarsa sağa kaydırılabilir */
+  overflow-x: auto;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 400px; /* Tablonun çok sıkışmasını önler */
+  min-width: 400px;
 }
 
 th, td {
