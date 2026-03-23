@@ -21,7 +21,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1 style={{textAlign: 'center'}}>🎯Ders Programı Planlayıcısı</h1>
+      <h1 style={{textAlign: 'center'}}>🎯DGS Ders Programı Planlayıcısı</h1>
       <p style={{textAlign: 'center', color: '#94a3b8', marginBottom: '20px'}}>İstediğiniz Üniversiteye Yönelik Çalışma Programı</p>
       
       <div className="input-group">
