@@ -139,12 +139,27 @@ td {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding: 20px;
-  background: white;
+  gap: 12px;
+  padding: 25px;
+  background: white; /* Beyaz zemin kalabilir */
   border-radius: 20px;
-  margin: 20px auto;
+  margin: 30px auto;
   width: fit-content;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.qr-section p {
+  color: #0f172a !important; /* Koyu lacivert - kesin görünür */
+  font-weight: 800;
+  margin: 0;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.qr-section span {
+  color: #475569 !important; /* Daha belirgin gri */
+  font-size: 0.75rem;
+  font-weight: 500;
 }
 
 /* --- İSTATİSTİK KARTLARI DÜZENLEME --- */

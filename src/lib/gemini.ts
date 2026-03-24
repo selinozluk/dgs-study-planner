@@ -1,57 +1,47 @@
 // src/lib/gemini.ts
 
 export const generatePlan = async (ad: string, hedef: string, konular: string) => {
-  // Bu fonksiyon artık yapay zekaya gitmez, doğrudan güvenli tabloyu döndürür.
+  // Kullanıcının girdiği konuları temizleyip listeye çeviriyoruz
+  const konuListesi = konular ? konular.split(',').map(k => k.trim()) : ['Genel Matematik Tekrarı'];
+  
+  // Programı oluştururken kullanacağımız yardımcı fonksiyon
+  const getKonu = (gunIndex: number) => {
+    return konuListesi[gunIndex % konuListesi.length];
+  };
+
   return `
     <table style="width:100%; border-collapse: collapse; margin-top: 10px; color: white;">
       <thead>
         <tr style="background-color: #312e81;">
           <th style="padding: 12px; border: 1px solid #444; text-align: left;">Gün</th>
-          <th style="padding: 12px; border: 1px solid #444; text-align: left;">Konu Odaklı Çalışma</th>
+          <th style="padding: 12px; border: 1px solid #444; text-align: left;">Odaklanılacak Konu</th>
+          <th style="padding: 12px; border: 1px solid #444; text-align: left;">DGS Rutini (Sabah/Akşam)</th>
           <th style="padding: 12px; border: 1px solid #444; text-align: left;">Soru Hedefi</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td style="padding: 10px; border: 1px solid #444;">1. Gün</td>
-          <td style="padding: 10px; border: 1px solid #444;">${konular || 'Temel Kavramlar'} - Giriş ve Seviye 1 Testler</td>
-          <td style="padding: 10px; border: 1px solid #444;">80 Soru</td>
-        </tr>
-        <tr>
-          <td style="padding: 10px; border: 1px solid #444;">2. Gün</td>
-          <td style="padding: 10px; border: 1px solid #444;">Rasyonel Sayılar, Bölünebilme Kuralları</td>
-          <td style="padding: 10px; border: 1px solid #444;">100 Soru</td>
-        </tr>
-        <tr>
-          <td style="padding: 10px; border: 1px solid #444;">3. Gün</td>
-          <td style="padding: 10px; border: 1px solid #444;">Üslü Sayılar ve Köklü İfadeler Tekrarı</td>
-          <td style="padding: 10px; border: 1px solid #444;">100 Soru</td>
-        </tr>
-        <tr>
-          <td style="padding: 10px; border: 1px solid #444;">4. Gün</td>
-          <td style="padding: 10px; border: 1px solid #444;">Sayı ve Kesir Problemleri (DGS Tarzı)</td>
-          <td style="padding: 10px; border: 1px solid #444;">120 Soru</td>
-        </tr>
-        <tr>
-          <td style="padding: 10px; border: 1px solid #444;">5. Gün</td>
-          <td style="padding: 10px; border: 1px solid #444;">Sayısal Mantık Rutini ve Geometri Giriş</td>
-          <td style="padding: 10px; border: 1px solid #444;">90 Soru</td>
-        </tr>
-        <tr>
-          <td style="padding: 10px; border: 1px solid #444;">6. Gün</td>
-          <td style="padding: 10px; border: 1px solid #444;">Paragraf ve Sözel Mantık Çözümleri</td>
-          <td style="padding: 10px; border: 1px solid #444;">70 Soru</td>
-        </tr>
-        <tr>
+        ${[1, 2, 3, 4, 5, 6].map(gun => `
+          <tr>
+            <td style="padding: 10px; border: 1px solid #444;">${gun}. Gün</td>
+            <td style="padding: 10px; border: 1px solid #444; font-weight: bold; color: #a78bfa;">
+              ${getKonu(gun - 1)}
+            </td>
+            <td style="padding: 10px; border: 1px solid #444; font-size: 0.85rem;">
+              20 Paragraf + 15 Problem Sorusu (Zorunlu)
+            </td>
+            <td style="padding: 10px; border: 1px solid #444;">${80 + (gun * 10)} Soru</td>
+          </tr>
+        `).join('')}
+        <tr style="background: rgba(139, 92, 246, 0.1);">
           <td style="padding: 10px; border: 1px solid #444;">7. Gün</td>
-          <td style="padding: 10px; border: 1px solid #444;">DGS Genel Deneme ve Yanlış Analizi</td>
-          <td style="padding: 10px; border: 1px solid #444;">150 Soru</td>
+          <td style="padding: 10px; border: 1px solid #444; font-weight: bold; color: #f472b6;">GENEL DENEME SINAWI</td>
+          <td style="padding: 10px; border: 1px solid #444; font-size: 0.85rem;">Tüm Haftanın Analizi ve Eksik Giderme</td>
+          <td style="padding: 10px; border: 1px solid #444;">Deneme + 50 Soru</td>
         </tr>
       </tbody>
     </table>
     <div style="text-align: center; margin-top: 15px;">
-      <p style="font-size: 13px; color: #a78bfa; margin: 0;">Sayın ${ad}, program ${hedef} hedefinize özel oluşturulmuştur.</p>
-      <p style="font-size: 11px; color: #64748b;">* AI Analiz Modu aktif edildi.</p>
+      <p style="font-size: 13px; color: #a78bfa; margin: 0;">Sayın ${ad}, program ${hedef} hedefinize ve yazdığınız konulara göre dinamik olarak güncellenmiştir.</p>
     </div>
   `;
 };
