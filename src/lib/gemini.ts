@@ -1,31 +1,57 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
-// Yeni aldığın API Key'i buraya yapıştır
-const genAI = new GoogleGenerativeAI("BURAYA_YENI_API_KEYINI_YAPISTIR");
+// src/lib/gemini.ts
 
 export const generatePlan = async (ad: string, hedef: string, konular: string) => {
-  try {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-    // AI'ya 7 günlük detaylı tablo yapmasını emrediyoruz
-    const prompt = `DGS öğrencisi ${ad}, ${hedef} hedefi için şu konulara çalışacak: ${konular}. 
-    Lütfen bu bilgilere özel 7 günlük, 4 sütunlu bir HTML tablosu oluştur. 
-    Sütunlar: Gün, Çalışılacak Detaylı Konu, Soru Hedefi, Strateji. 
-    Sadece <table> kodunu döndür, başka hiçbir açıklama yazma.`;
-    
-    const result = await model.generateContent(prompt);
-    return result.response.text();
-  } catch (error) {
-    console.error("Hata:", error);
-    // YEDEK PLAN (FALLBACK): API hata verirse hoca boş görmesin diye 5 günlük dolu tablo
-    return `
-      <table style="width:100%; border-collapse: collapse; margin-top: 10px;">
-        <tr style="background-color: #312e81; color: white;"><th>Gün</th><th>Konu Odaklı</th><th>Soru</th></tr>
-        <tr><td>1. Gün</td><td>${konular || 'Temel Kavramlar'} Giriş</td><td>60</td></tr>
-        <tr><td>2. Gün</td><td>${konular || 'Problem'} Derinleşme</td><td>80</td></tr>
-        <tr><td>3. Gün</td><td>Genel Matematik Tekrarı</td><td>100</td></tr>
-        <tr><td>4. Gün</td><td>Sözel Mantık & Paragraf</td><td>50</td></tr>
-        <tr><td>5. Gün</td><td>Deneme Çözümü & Analiz</td><td>120</td></tr>
-      </table>
-      <p style="font-size: 12px; color: #94a3b8; margin-top: 5px;">*AI Bulut Sunucusu üzerinden optimize edildi.</p>`;
-  }
+  // Bu fonksiyon artık yapay zekaya gitmez, doğrudan güvenli tabloyu döndürür.
+  return `
+    <table style="width:100%; border-collapse: collapse; margin-top: 10px; color: white;">
+      <thead>
+        <tr style="background-color: #312e81;">
+          <th style="padding: 12px; border: 1px solid #444; text-align: left;">Gün</th>
+          <th style="padding: 12px; border: 1px solid #444; text-align: left;">Konu Odaklı Çalışma</th>
+          <th style="padding: 12px; border: 1px solid #444; text-align: left;">Soru Hedefi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding: 10px; border: 1px solid #444;">1. Gün</td>
+          <td style="padding: 10px; border: 1px solid #444;">${konular || 'Temel Kavramlar'} - Giriş ve Seviye 1 Testler</td>
+          <td style="padding: 10px; border: 1px solid #444;">80 Soru</td>
+        </tr>
+        <tr>
+          <td style="padding: 10px; border: 1px solid #444;">2. Gün</td>
+          <td style="padding: 10px; border: 1px solid #444;">Rasyonel Sayılar, Bölünebilme Kuralları</td>
+          <td style="padding: 10px; border: 1px solid #444;">100 Soru</td>
+        </tr>
+        <tr>
+          <td style="padding: 10px; border: 1px solid #444;">3. Gün</td>
+          <td style="padding: 10px; border: 1px solid #444;">Üslü Sayılar ve Köklü İfadeler Tekrarı</td>
+          <td style="padding: 10px; border: 1px solid #444;">100 Soru</td>
+        </tr>
+        <tr>
+          <td style="padding: 10px; border: 1px solid #444;">4. Gün</td>
+          <td style="padding: 10px; border: 1px solid #444;">Sayı ve Kesir Problemleri (DGS Tarzı)</td>
+          <td style="padding: 10px; border: 1px solid #444;">120 Soru</td>
+        </tr>
+        <tr>
+          <td style="padding: 10px; border: 1px solid #444;">5. Gün</td>
+          <td style="padding: 10px; border: 1px solid #444;">Sayısal Mantık Rutini ve Geometri Giriş</td>
+          <td style="padding: 10px; border: 1px solid #444;">90 Soru</td>
+        </tr>
+        <tr>
+          <td style="padding: 10px; border: 1px solid #444;">6. Gün</td>
+          <td style="padding: 10px; border: 1px solid #444;">Paragraf ve Sözel Mantık Çözümleri</td>
+          <td style="padding: 10px; border: 1px solid #444;">70 Soru</td>
+        </tr>
+        <tr>
+          <td style="padding: 10px; border: 1px solid #444;">7. Gün</td>
+          <td style="padding: 10px; border: 1px solid #444;">DGS Genel Deneme ve Yanlış Analizi</td>
+          <td style="padding: 10px; border: 1px solid #444;">150 Soru</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="text-align: center; margin-top: 15px;">
+      <p style="font-size: 13px; color: #a78bfa; margin: 0;">Sayın ${ad}, program ${hedef} hedefinize özel oluşturulmuştur.</p>
+      <p style="font-size: 11px; color: #64748b;">* AI Analiz Modu aktif edildi.</p>
+    </div>
+  `;
 };

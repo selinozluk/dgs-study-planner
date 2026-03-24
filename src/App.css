@@ -1,89 +1,190 @@
+/* src/App.css */
 :root {
-  --bg: #0f172a;
-  --card: #1e293b;
-  --accent: #8b5cf6;
+  --primary: #a78bfa;
+  --secondary: #f472b6;
+  --bg: #030712;
+  --card-bg: rgba(17, 24, 39, 0.7);
 }
 
 body {
-  background-color: var(--bg);
+  background: radial-gradient(circle at top, #1e1b4b 0%, #030712 100%);
   margin: 0;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  padding: 20px;
-  color: white;
+  align-items: flex-start;
   font-family: 'Inter', sans-serif;
+  color: #f3f4f6;
+  padding: 40px 20px;
 }
 
 .container {
   width: 100%;
-  max-width: 700px;
-  background: var(--card);
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-  /* ÖNEMLİ: Elemanları alt alta dizer ve aralarına 20px boşluk koyar */
+  max-width: 1000px; 
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 40px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   display: flex;
-  flex-direction: column; 
-  gap: 20px; 
+  flex-direction: column;
+  gap: 25px;
+}
+
+.header-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 h1 {
-  font-size: 2rem;
+  /* Başlığın kesilmesini önlemek için line-height ve padding artırıldı */
+  font-size: 3rem; 
+  line-height: 1.5; 
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
   text-align: center;
   margin: 0;
-  color: #f8fafc;
-  line-height: 1.2;
+  padding: 10px 0;
+  font-weight: 900;
+  letter-spacing: -1.5px;
 }
 
-.input-group {
+p.subtitle {
+  color: #9ca3af;
+  margin: 0;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+/* FORM ALANI */
+.form-group {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 15px;
 }
 
 input, textarea {
   width: 100%;
-  padding: 14px;
-  background: #0f172a;
-  border: 1px solid #334155;
-  color: white;
-  border-radius: 10px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f3f4f6;
+  border-radius: 12px;
   font-size: 16px;
   box-sizing: border-box;
 }
 
 button {
   width: 100%;
-  padding: 16px;
-  background: linear-gradient(90deg, #6366f1, #a855f7);
+  padding: 18px;
+  background: linear-gradient(90deg, #6d28d9 0%, #db2777 100%);
   color: white;
   border: none;
-  border-radius: 10px;
-  font-weight: bold;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.1rem;
   cursor: pointer;
-  font-size: 16px;
+  transition: all 0.3s ease;
 }
 
+button:hover {
+  box-shadow: 0 0 25px rgba(109, 40, 217, 0.5);
+  transform: translateY(-2px);
+}
+
+/* SONUÇ VE TABLO ALANI */
 .result-box {
-  background: #0f172a;
-  padding: 20px;
-  border-radius: 12px;
-  border-left: 4px solid var(--accent);
-  overflow-x: auto;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 15px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow-x: auto; /* Tablo genişleyince kaydırma çubuğu çıkar */
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 400px;
+  min-width: 800px; /* Tablonun ezilmesini önler */
 }
 
 th, td {
   padding: 12px;
-  border: 1px solid #334155;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   text-align: left;
+  font-size: 0.85rem; 
+  line-height: 1.4;
+  vertical-align: top;
 }
 
 th {
-  background-color: #312e81;
+  background-color: rgba(109, 40, 217, 0.4);
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+td {
+  background: rgba(15, 23, 42, 0.2);
+}
+
+/* QR ALANI */
+.qr-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  background: white;
+  border-radius: 20px;
+  margin: 20px auto;
+  width: fit-content;
+}
+
+/* --- İSTATİSTİK KARTLARI DÜZENLEME --- */
+
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 eşit sütun oluşturur */
+  gap: 15px; /* Kartlar arasındaki boşluk */
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.stat-value {
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.stat-label {
+  color: #94a3b8;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Mobilde kartlar çok sıkışırsa alt alta geçsinler */
+@media (max-width: 600px) {
+  .stats-container {
+    grid-template-columns: 1fr;
+  }
 }
